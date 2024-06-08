@@ -1,21 +1,15 @@
 #Author : CleanHouse <Jew>
 
 # set the git_prompt_info text
-ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue](%{$reset_color%}%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%{$fg[blue])%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="⚡"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}(%{$reset_color%}%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[blue])%}"
+ZSH_THEME_GIT_PROMPT_DIRTY=" ⚡"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 local local_time="%*"
-local username="%n"
 
-# username
-if [ ! -z "$MYHOST" ]; then
-	username="$MYHOST"
-fi
-
-local host_name="%{$fg[green]%} ${username}"
-local time_string="%{$fg[red]%}${local_time}"
+local host_name="%{$fg[green]%} ${(C)${(%):-%n}[1]}${${(%):-%n}[2,-1]}"
+local time_string="%{$fg[white]%}${local_time}"
 
 PROMPT='[%F{blue} %~%f]$(git_prompt_info)%{$reset_color%} 
 ${host_name}${hosr}%{$reset_color%} ❯ '
@@ -29,4 +23,5 @@ get_ip_address() {
     echo "%{$fg[red]%}No IP%{$reset_color%}"
   fi
 }
+
 
